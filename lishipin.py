@@ -32,20 +32,28 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("处理用户输入参数")
     parser.add_argument("-s", "-start", type=int, required=True)
     parser.add_argument("-e", "-end", type=int, required=True)
-    parser.add_argument("-l", type=int, required=True)
+    parser.add_argument("-l", type=int, required=False)
     args = parser.parse_args()
-    if 1<=args.l and args.l<=3:
+
+while 1 :
+    if args.l==None:
+        break
+    if 1<=args.l and args.l<=3 :
         if args.l==1:
             print("level1")
             Number_threads=10
+            break
         if args.l==2:
             print("level2")
             Number_threads=20
+            break
         if args.l==3:
             print("level3")
             Number_threads=30
+            break
     else :
         print("输入错误")
+Number_threads=20
 with ThreadPoolExecutor(Number_threads) as t:
        for i in range(args.s,args.e+1):
          t.submit(func,"https://www.pearvideo.com/video_{0}".format(i),"video_{0}".format(i))
